@@ -1,0 +1,6 @@
+persistencebot
+.env
+down/
+__pycache__
+.idea/
+venv/

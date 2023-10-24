@@ -1,0 +1,46 @@
+version: '3.7'
+
+services:
+  video-download-bot:
+    build:
+      dockerfile: ./templates/Dockerfile
+      context: .
+    environment:
+      BOT_TOKEN: <token>
+      TELEGRAM_API_URL: http://telegram-bot-api:8081/bot
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+      REDIS_DB: 0
+    volumes:
+      - telegram-bot-api-data:/app/data
+    networks:
+      - tg-net
+    depends_on:
+      - telegram-bot-api
+      - redis
+  telegram-bot-api:
+    image: aiogram/telegram-bot-api:latest
+    environment:
+      TELEGRAM_API_ID: <api-id>
+      TELEGRAM_API_HASH: <api-hash>
+      TELEGRAM_LOCAL: 1
+    volumes:
+      - telegram-bot-api-data:/var/lib/telegram-bot-api
+    ports:
+      - "8081:8081"
+    networks:
+      - tg-net
+  redis:
+    image: bitnami/redis:latest
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
+    volumes:
+      - redis_data:/bitnami/redis/data
+    networks:
+      - tg-net
+
+networks:
+  tg-net:
+volumes:
+  telegram-bot-api-data:
+  redis_data:

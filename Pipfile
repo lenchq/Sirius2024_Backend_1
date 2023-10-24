@@ -1,0 +1,17 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+yt-dlp = "*"
+python-dotenv = "*"
+py-linq = "*"
+redis = {extras = ["hiredis"], version = "*"}
+python-telegram-bot = {extras = ["job-queue"], version = "*"}
+apscheduler = "*"
+
+[dev-packages]
+
+[requires]
+python_version = "3.11"
