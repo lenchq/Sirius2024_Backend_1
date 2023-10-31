@@ -85,8 +85,8 @@ async def download_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -
 
         result_video = Enumerable(video["formats"]) \
             .where(lambda x: (x["ext"] == "mp4" and "width" in x) or vk_domain) \
-            .where(lambda x: x.get("height", 0) in [360, 480, 720, 1080]
-                             or x.get("width", 0) in [360, 480, 720, 1080])
+            .where(lambda x: x.get("height", 0) in [360, 480, 720, 1280, 1080]
+                             or x.get("width", 0) in [360, 480, 720, 1280, 1080])
 
         # vk does not provides audio information
         if (not vk_domain):
